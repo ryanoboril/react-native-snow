@@ -7,7 +7,12 @@ If you are enthusiastic about winter weather or the winter holiday season, you
 can make your app festive very easily with this component!
 
 # Usage
-To use, import the Snow component:
+To use, install the npm module:
+```
+npm install --save react-native-snow
+```
+
+Then import the Snow component:
 ```
 import Snow from 'react-native-snow';
 ```
