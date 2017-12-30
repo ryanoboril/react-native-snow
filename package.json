@@ -2,10 +2,13 @@
   "name": "react-native-snow",
   "version": "0.1.0",
   "description": "Fullscreen snow overlay component for react native",
-  "main": "Snow.js",
+  "main": "./src/Snow.js",
   "scripts": {
     "test": "jest"
   },
+  "directories": [
+    "src/"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ryanoboril/react-native-snow.git"
