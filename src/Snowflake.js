@@ -6,12 +6,17 @@ import {
   Dimensions,
   Animated,
   Easing,
+  AppState
 } from 'react-native';
 import PropTypes from 'prop-types';
 
 const windowHeight = Dimensions.get('window').height + (Dimensions.get('window').height * .1);
 
 export default class Snowflake extends Component {
+
+  _fallAnimation = null;
+  _shakeAnimation = null;
+
   constructor(props) {
     super(props);
 
@@ -27,48 +32,92 @@ export default class Snowflake extends Component {
       offset: props.offset || 0,
       translateY: new Animated.Value(0),
       translateX: new Animated.Value(0),
+      appState: AppState.currentState,
     };
   }
 
-  componentDidMount() {
-    setTimeout( () => {
-      Animated.loop(
+  _handleAppStateChange = (nextAppState) => {
+    if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
+      // App is coming into foreground
+      this._initAnimation();
+    }
+    if (this.state.appState.match(/^active|foreground/) && nextAppState === 'inactive') {
+      // App is going into background
+      this._stopAnimation();
+    }
+    this.setState({appState: nextAppState});
+  }
+
+  _stopAnimation() {
+    if (this._fallAnimation) {
+      this._fallAnimation.stop();
+      this._fallAnimation = null;
+      this.setState({
+        translateY: new Animated.Value(0),
+      });
+    }
+
+    if (this._shakeAnimation) {
+      this._shakeAnimation.stop();
+      this._shakeAnimation = null;
+      this.setState({
+        translateX: new Animated.Value(0),
+      });
+    }
+  }
+
+  _initAnimation() {
+    this._fallAnimation = Animated.loop(
+      Animated.timing(
+        this.state.translateY,
+        {
+          toValue: 1,
+          easing: Easing.linear,
+          duration: this.state.fallDuration,
+          useNativeDriver: true,
+        }
+      )
+    );
+
+    this._shakeAnimation = Animated.loop(
+      Animated.sequence([
         Animated.timing(
-          this.state.translateY,
+          this.state.translateX,
           {
             toValue: 1,
-            easing: Easing.linear,
-            duration: this.state.fallDuration,
+            easing: Easing.easeInOutSine,
+            duration: this.state.shakeDuration / 2,
+            useNativeDriver: true,
+          }
+        ),
+        Animated.timing(
+          this.state.translateX,
+          {
+            toValue: 0,
+            easing: Easing.easeInOutSine,
+            duration: this.state.shakeDuration / 2,
             useNativeDriver: true,
           }
         )
-      ).start();
+      ])
+    );
+
+    setTimeout( () => {
+      this._fallAnimation && this._fallAnimation.start();
     }, this.state.fallDelay);
 
     setTimeout( () => {
-      Animated.loop(
-        Animated.sequence([
-          Animated.timing(
-            this.state.translateX,
-            {
-              toValue: 1,
-              easing: Easing.easeInOutSine,
-              duration: this.state.shakeDuration / 2,
-              useNativeDriver: true,
-            }
-          ),
-          Animated.timing(
-            this.state.translateX,
-            {
-              toValue: 0,
-              easing: Easing.easeInOutSine,
-              duration: this.state.shakeDuration / 2,
-              useNativeDriver: true,
-            }
-          )
-        ])
-      ).start();
+      this._shakeAnimation && this._shakeAnimation.start();
     }, this.state.shakeDelay);
+  }
+
+  componentDidMount() {
+    AppState.addEventListener('change', this._handleAppStateChange);
+    this._initAnimation();
+  }
+
+  componentWillUnmount() {
+    AppState.removeEventListener('change', this._handleAppStateChange);
   }
 
   render() {
