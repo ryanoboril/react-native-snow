@@ -10,7 +10,20 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 
-const windowHeight = Dimensions.get('window').height + (Dimensions.get('window').height * .1);
+const topOffset = Dimensions.get('window').height * .1;
+const windowHeight = Dimensions.get('window').height + topOffset;
+
+Snowflake.propTypes = {
+  glyph: PropTypes.string,
+  visible: PropTypes.bool,
+  size: PropTypes.number,
+  offset: PropTypes.string,
+  amplitude: PropTypes.number,
+  fallDuration: PropTypes.number,
+  shakeDuration: PropTypes.number,
+  fallDelay: PropTypes.number,
+  shakeDelay: PropTypes.number,
+};
 
 export default class Snowflake extends Component {
 
@@ -143,21 +156,9 @@ export default class Snowflake extends Component {
   }
 }
 
-Snowflake.propTypes = {
-  glyph: PropTypes.string,
-  visible: PropTypes.bool,
-  size: PropTypes.number,
-  offset: PropTypes.string,
-  amplitude: PropTypes.number,
-  fallDuration: PropTypes.number,
-  shakeDuration: PropTypes.number,
-  fallDelay: PropTypes.number,
-  shakeDelay: PropTypes.number,
-};
-
 const styles = StyleSheet.create({
   text: {
-    top: '-10%',
+    top: -topOffset,
     height: windowHeight,
     color: 'white',
     backgroundColor: 'transparent',

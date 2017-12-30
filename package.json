@@ -27,5 +27,8 @@
     "url": "https://github.com/ryanoboril/react-native-snow/issues"
   },
   "homepage": "https://github.com/ryanoboril/react-native-snow#readme",
-  "devDependencies": {}
+  "devDependencies": {},
+  "dependencies": {
+    "prop-types": "^15.6.0"
+  }
 }

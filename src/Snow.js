@@ -4,7 +4,6 @@ import {
   View,
   Dimensions,
 } from 'react-native';
-import PropTypes from 'prop-types';
 import Snowflake from './Snowflake';
 
 const windowHeight = Dimensions.get('window').height + (Dimensions.get('window').height * .1);
