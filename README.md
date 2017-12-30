@@ -6,9 +6,7 @@ overlay of snow on your app, making it easy to apply and remove.
 If you are enthusiastic about winter weather or the winter holiday season, you
 can make your app festive very easily with this component!
 
-![alt android](https://github.com/ryanoboril/react-native-snow/blob/master/Example/screenshots/android.png?raw=true "Android")
-
-![alt android](https://github.com/ryanoboril/react-native-snow/blob/master/Example/screenshots/ios.png?raw=true "iOS")
+<img src="https://github.com/ryanoboril/react-native-snow/blob/master/Example/screenshots/android.png" width="250" height="444" /> | <img src="https://github.com/ryanoboril/react-native-snow/blob/master/Example/screenshots/ios.png" width="250" height="444" />
 
 # Thanks
 
