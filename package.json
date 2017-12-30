@@ -1,0 +1,28 @@
+{
+  "name": "react-native-snow",
+  "version": "0.1.0",
+  "description": "Fullscreen snow overlay component for react native",
+  "main": "Snow.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryanoboril/react-native-snow.git"
+  },
+  "keywords": [
+    "react",
+    "native",
+    "snow",
+    "holiday",
+    "winter",
+    "weather"
+  ],
+  "author": "Ryan Oboril",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ryanoboril/react-native-snow/issues"
+  },
+  "homepage": "https://github.com/ryanoboril/react-native-snow#readme",
+  "devDependencies": {}
+}
