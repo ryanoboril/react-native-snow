@@ -30,11 +30,16 @@ export default class Snowflake extends Component {
       shakeDuration: props.shakeDuration || 4000,
       fallDelay: props.fallDelay || 0,
       shakeDelay: props.shakeDelay || 0,
-      offset: props.offset || 0,
+      offset: this._toNumber(props.offset) || 0,
       translateY: new Animated.Value(0),
       translateX: new Animated.Value(0),
       appState: AppState.currentState,
     };
+  }
+
+  // Added to support older versions of react native
+  _toNumber = (percentString) => {
+    return +percentString.slice(0, -1) / 100;
   }
 
   _handleAppStateChange = (nextAppState) => {
