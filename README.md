@@ -32,7 +32,7 @@ export default class App extends Component<{}> {
 }
 ```
 
-<img src="https://github.com/ryanoboril/react-native-snow/blob/master/Example/screenshots/android.png" width="250" height="444" /> <img src="https://github.com/ryanoboril/react-native-snow/blob/master/Example/screenshots/ios.png" width="250" height="444" />
+<img src="https://s3.amazonaws.com/react-native-snow-screenshots/android.png" width="250" height="444" /> <img src="https://s3.amazonaws.com/react-native-snow-screenshots/ios.png" width="250" height="444" />
 
 # Thanks
 
