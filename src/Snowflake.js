@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import {
   StyleSheet,
-  Text,
-  View,
   Dimensions,
   Animated,
   Easing,
   AppState
 } from 'react-native';
-import PropTypes from 'prop-types';
+import PropTypes, { shape } from 'prop-types';
 
 const topOffset = Dimensions.get('window').height * .1;
 const windowHeight = Dimensions.get('window').height + topOffset;
@@ -122,6 +120,7 @@ export default class Snowflake extends Component {
   }
 
   render() {
+    const { style } = this.props;
     const translateX = this.state.translateX.interpolate({
       inputRange: [0, 1],
       outputRange: [0, this.state.amplitude]
@@ -137,7 +136,7 @@ export default class Snowflake extends Component {
         fontSize: this.state.size,
         left: this.state.offset,
         transform: [{translateX}, {translateY}]
-      }]}>
+      }, style]}>
         {this.state.glyph}
       </Animated.Text>
     );
@@ -154,6 +153,9 @@ Snowflake.propTypes = {
   shakeDuration: PropTypes.number,
   fallDelay: PropTypes.number,
   shakeDelay: PropTypes.number,
+  style: shape({
+    color: PropTypes.string,
+  }),
 };
 
 const styles = StyleSheet.create({

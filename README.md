@@ -34,6 +34,18 @@ export default class App extends Component<{}> {
 
 <img src="https://s3.amazonaws.com/react-native-snow-screenshots/android.png" width="250" height="444" /> <img src="https://s3.amazonaws.com/react-native-snow-screenshots/ios.png" width="250" height="444" />
 
+# Props
+```
+Snow.propTypes = {
+  // snowflakesStyle: shape { color: string }
+  // Specify color of snowflakes.
+  snowflakesStyle: { color: 'blue' },
+  // snowfall: can be one of ['light', 'medium']
+  // Controls the amount of snowflakes present.
+  snowfall: 'medium',
+};
+```
+
 # Thanks
 
 This is heavily inspired by [CSS Snowflakes](https://pajasevi.github.io/CSSnowflakes/) (it is basically a React Native port with some tweaks).

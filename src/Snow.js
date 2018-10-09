@@ -4,27 +4,49 @@ import {
   View,
   Dimensions,
 } from 'react-native';
+import { oneOf, shape, string } from 'prop-types';
+import { lightSnowflakes, mediumSnowflakes } from '../config/snowflakeStrategies';
 import Snowflake from './Snowflake';
 
 const windowHeight = Dimensions.get('window').height + (Dimensions.get('window').height * .1);
 
 export default class Snow extends Component {
   render() {
+    const { snowfall, snowflakesStyle } = this.props;
+    const snowflakes = snowfall === 'medium' ? mediumSnowflakes : lightSnowflakes;
     return (
-        <View style={styles.view} pointerEvents="none">
-          <Snowflake glyph='❆' size={14} offset='1%' fallDelay={0} shakeDelay={0} />
-          <Snowflake glyph='❅' size={24} offset='5%' fallDelay={1000} shakeDelay={1000} />
-          <Snowflake glyph='❆' size={14} offset='10%' fallDelay={6000} shakeDelay={500} />
-          <Snowflake glyph='❅' size={18} offset='15%' fallDelay={4000} shakeDelay={2000} />
-          <Snowflake glyph='❆' size={14} offset='20%' fallDelay={2000} shakeDelay={2000} />
-          <Snowflake glyph='❆' size={24} offset='25%' fallDelay={8000} shakeDelay={3000} />
-          <Snowflake glyph='❆' size={14} offset='30%' fallDelay={6000} shakeDelay={2000} />
-          <Snowflake glyph='❅' size={18} offset='35%' fallDelay={2500} shakeDelay={1000} />
-          <Snowflake glyph='❆' size={14} offset='40%' fallDelay={3000} shakeDelay={1500} />
-        </View>
+      <View style={styles.view} pointerEvents="none">
+        {
+          snowflakes.map((snowflake, i) => {
+            const { glyph, size, offset, fallDelay, shakeDelay } = snowflake;
+            return (
+              <Snowflake
+                key={`snowflake-${i}`}
+                glyph={glyph}
+                size={size}
+                offset={offset}
+                fallDelay={fallDelay}
+                shakeDelay={shakeDelay}
+                style={snowflakesStyle}
+              />
+            );
+          })
+        }
+      </View>
     );
   }
 }
+
+Snow.propTypes = {
+  snowfall: oneOf(['light', 'medium']),
+  snowflakesStyle: shape({
+    color: string,
+  }),
+};
+
+Snow.defaultProps = {
+  snowfall: 'light',
+};
 
 const styles = StyleSheet.create({
   view: {
