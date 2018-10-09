@@ -37,11 +37,9 @@ export default class App extends Component<{}> {
 # Props
 ```
 Snow.propTypes = {
-  // snowflakesStyle: shape { color: string }
   // Specify color of snowflakes.
   snowflakesStyle: { color: 'blue' },
-  // snowfall: can be one of ['light', 'medium']
-  // Controls the amount of snowflakes present.
+  // Specify amount of snowflakes present ('light', 'medium')
   snowfall: 'medium',
 };
 ```

@@ -8,8 +8,9 @@ import {
 } from 'react-native';
 import PropTypes, { shape } from 'prop-types';
 
-const topOffset = Dimensions.get('window').height * .1;
-const windowHeight = Dimensions.get('window').height + topOffset;
+const HEIGHT = Dimensions.get('window').height;
+const topOffset = HEIGHT * .1;
+const windowHeight = HEIGHT + topOffset;
 
 export default class Snowflake extends Component {
 
